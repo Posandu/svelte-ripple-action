@@ -1,6 +1,6 @@
 {
 	"name": "svelte-ripple-action",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A svelte action to add a ripple effect to any element",
 	"scripts": {
 		"dev": "vite dev",
@@ -45,5 +45,6 @@
 		"type": "git",
 		"url": "https://github.com/posandu/svelte-ripple-action"
 	},
-	"author": "posandu"
+	"author": "posandu",
+	"main": "./dist/index.js"
 }
