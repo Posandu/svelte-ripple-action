@@ -1,6 +1,6 @@
 {
 	"name": "svelte-ripple-action",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A svelte action to add a ripple effect to any element",
 	"scripts": {
 		"dev": "vite dev",
@@ -15,7 +15,8 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
-		}
+		},
+		"./ripple.css": "./dist/ripple.css"
 	},
 	"files": [
 		"dist",

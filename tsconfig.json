@@ -8,5 +8,6 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true
-	}
+	},
+	"moduleResolution": "NodeNext"
 }

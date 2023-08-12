@@ -1,4 +1,4 @@
-import type { RippleOptions } from "./constants";
+import type { RippleOptions } from "./constants.js";
 import {
 	INEVENTS,
 	OUTEVENTS,

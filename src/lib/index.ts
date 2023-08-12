@@ -1,1 +1,1 @@
-export { ripple } from "./ripple";
+export { ripple } from "./ripple.js";
