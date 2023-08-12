@@ -42,7 +42,7 @@
 		<code> Svelte ripple action </code>
 	</h1>
 
-	<p class="description">Svelte action for a ripple effect</p>
+	<p class="description">Svelte directive for a ripple effect</p>
 </div>
 
 <div class="container">
@@ -58,7 +58,7 @@
 		></pre>
 
 	<p>
-		Import the action from the package and use it on any element you want to
+		Import the directive from the package and use it on any element you want to
 		have a ripple effect on
 	</p>
 
@@ -188,38 +188,74 @@
 			>{`<div use:ripple class="box imgripple">Image ripple</div>
 <div use:ripple class="box gradient">Gradient ripple</div>
 
+<br />
+
+<p>Needs to be wrapped in a div for void elements like img, input, etc.</p>
+<div use:ripple class="imgbox">
+	<img
+		src="https://media.tenor.com/VFFJ8Ei3C2IAAAAM/rickroll-rick.gif"
+		alt="Man dancing"
+	/>
+</div>
+
+<div
+	use:ripple={{
+		color: "rgba(0,0,0,0.5)",
+	}}
+>
+	<input type="text" placeholder="Type something" style="width: 100%;" />
+</div>
+
 <style>
-  .box {
-    height: 200px;
-    width: 200px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-top: 20px;
-    margin-right: 20px;
-    display: inline-flex;
-  }  
-  .imgripple {
-    & .ripple {
-    	background: url(https://media.tenor.com/VFFJ8Ei3C2IAAAAM/rickroll-rick.gif);
-    	background-size: 80%;
-    	background-position: center;
-    	background-repeat: no-repeat;
-    	z-index: -1;
-    }
-  }  
-  .gradient {
-    & .ripple {
-    	background: linear-gradient(45deg, #f3ed783d, #af4261);
-    }
+.box {
+  height: 200px;
+  width: 200px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-right: 20px;
+  display: inline-flex;
+}
+
+.imgbox {
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-right: 20px;
+  display: inline-flex;
+  & img {
+  	width: 100%;
+  	height: 100%;
+  	object-fit: cover;
   }
+}
+
+.imgripple {
+  & .ripple {
+  	background: url(https://media.tenor.com/VFFJ8Ei3C2IAAAAM/rickroll-rick.gif);
+  	background-size: 80%;
+  	background-position: center;
+  	background-repeat: no-repeat;
+  	z-index: -1;
+  }
+}
+
+.gradient {
+  & .ripple {
+  	background: linear-gradient(45deg, #f3ed783d, #af4261);
+  }
+}
 </style>`}</code
 		></pre>
 
 	<footer style="margin-top: 20px;" class="footer">
 		<p>
-			Created by <a href="https://posandu.com">Posandu</a>. Check out the source code on <a href="https://github.com/posandu/svelte-ripple-action">GitHub</a>
+			Created by <a href="https://posandu.com">Posandu</a>. Check out the source
+			code on
+			<a href="https://github.com/posandu/svelte-ripple-action">GitHub</a>
 		</p>
 	</footer>
 </div>
