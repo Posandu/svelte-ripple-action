@@ -1,5 +1,11 @@
 # Svelte Ripple Action
 
+<p>
+  <img src="https://badgen.net/bundlephobia/minzip/svelte-ripple-action@1.0.2" />
+  <img src="https://img.shields.io/github/commit-activity/t/posandu/svelte-ripple-action" />
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/posandu/svelte-ripple-action">
+</p>
+
 View the [demo](https://ripple.posandu.com/).
 
 Svelte Ripple Action is a simple and customizable action for creating ripple effects on elements in a Svelte application.
