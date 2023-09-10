@@ -18,6 +18,10 @@ export interface RippleOptions {
 	 * Duration in seconds
 	 */
 	duration?: number;
+	/**
+	 * Max width of the ripple
+	 */
+	maxRadius?: number;
 }
 
 const addEvent = (

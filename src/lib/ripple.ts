@@ -22,6 +22,8 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 
 	addClassIfMissing();
 
+	let maximumRadius = 0;
+
 	const setOptions = (options: RippleOptions) => {
 		/**
 		 * Add custom --ripple-color if set
@@ -35,6 +37,13 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 		 */
 		if (options?.duration) {
 			el.style.setProperty("--ripple-duration", options.duration + "s");
+		}
+
+		/**
+		 * If maxWidth is set
+		 */
+		if (options?.maxRadius) {
+			maximumRadius = options.maxRadius;
 		}
 	};
 
@@ -56,9 +65,20 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 		const ripple = document.createElement("div");
 		ripple.classList.add("ripple");
 
-		ripple.style.left = e.clientX - rect.left - radius + "px";
-		ripple.style.top = e.clientY - rect.top - radius + "px";
-		ripple.style.width = ripple.style.height = radius * 2 + "px";
+		let size = radius * 2;
+		let top = e.clientY - rect.top - radius;
+		let left = e.clientX - rect.left - radius;
+
+		if (maximumRadius && size > maximumRadius) {
+			size = maximumRadius * 2;
+			top = e.clientY - rect.top - maximumRadius;
+			left = e.clientX - rect.left - maximumRadius;
+		}
+
+		ripple.style.left = left + "px";
+		ripple.style.top = top + "px";
+	
+		ripple.style.width = ripple.style.height = size + "px";
 
 		el.appendChild(ripple);
 

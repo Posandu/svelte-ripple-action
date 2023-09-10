@@ -1,7 +1,10 @@
 # Svelte Ripple Action
 
 <p>
-  <img src="https://badgen.net/bundlephobia/minzip/svelte-ripple-action@1.0.2" />
+  <img
+			src="https://deno.bundlejs.com/badge?q=svelte-ripple-action"
+			alt=""
+	/>
   <img src="https://img.shields.io/github/commit-activity/t/posandu/svelte-ripple-action" />
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/posandu/svelte-ripple-action">
 </p>
@@ -69,6 +72,14 @@ You can control the duration of the ripple effect in seconds by passing a number
 ```svelte
 <button use:ripple={{ duration: 2 }}>2 seconds</button>
 <button use:ripple={{ duration: 0.2 }}>0.2 seconds</button>
+```
+
+### `maxRadius?: number`
+
+You can control the maximum radius of the ripple effect in pixels by passing a number to the `maxRadius` option.
+
+```svelte
+<button use:ripple={{ maxRadius: 100 }}>100px</button>
 ```
 
 ## Credits

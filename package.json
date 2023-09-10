@@ -1,6 +1,6 @@
 {
 	"name": "svelte-ripple-action",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A svelte action to add a ripple effect to any element",
 	"scripts": {
 		"dev": "vite dev",

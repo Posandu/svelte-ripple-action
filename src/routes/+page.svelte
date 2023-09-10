@@ -43,6 +43,21 @@
 	</h1>
 
 	<p class="description">Svelte directive for a ripple effect</p>
+
+	<p style="margin-top: 20px;">
+		<img
+			src="https://deno.bundlejs.com/badge?q=svelte-ripple-action"
+			alt=""
+		/>
+		<img
+			src="https://img.shields.io/github/commit-activity/t/posandu/svelte-ripple-action"
+			alt=""
+		/>
+		<img
+			alt="GitHub Repo stars"
+			src="https://img.shields.io/github/stars/posandu/svelte-ripple-action"
+		/>
+	</p>
 </div>
 
 <div class="container">
@@ -180,6 +195,29 @@
 
 	<br />
 
+	<h3>
+		maxRadius?: <code>number</code>
+	</h3>
+
+	<p>
+		Maximum radius of the ripple effect. You can pass any valid number
+		<code>maxRadius</code> option.
+	</p>
+
+	<button
+		use:ripple={{
+			maxRadius: 200,
+		}}
+		class="btn"
+		style="margin: 10px 4px; width: 400px; height: 200px;"
+	>
+		200px
+	</button>
+
+	<pre><code class="language-html"
+			>{`<button use:ripple={{maxRadius:200}} style="width: 400px; height: 200px;">200px</button>`}
+</code></pre>
+
 	<h2>Some examples</h2>
 
 	<Examples />
@@ -280,7 +318,7 @@
 		align-items: center;
 		flex-direction: column;
 		justify-content: center;
-		min-height: 200px;
+		min-height: 300px;
 		background-color: #d8411b;
 		user-select: none;
 		color: white;
