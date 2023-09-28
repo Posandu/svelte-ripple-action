@@ -45,18 +45,24 @@
 	<p class="description">Svelte directive for a ripple effect</p>
 
 	<p style="margin-top: 20px;">
-		<img
-			src="https://deno.bundlejs.com/badge?q=svelte-ripple-action"
-			alt=""
-		/>
-		<img
-			src="https://img.shields.io/github/commit-activity/t/posandu/svelte-ripple-action"
-			alt=""
-		/>
-		<img
-			alt="GitHub Repo stars"
-			src="https://img.shields.io/github/stars/posandu/svelte-ripple-action"
-		/>
+		<a href="https://npmjs.com/package/svelte-ripple-action">
+			<img
+				src="https://deno.bundlejs.com/badge?q=svelte-ripple-action"
+				alt=""
+			/>
+		</a>
+		<a href="https://github.com/posandu/svelte-ripple-action/commits">
+			<img
+				src="https://img.shields.io/github/commit-activity/t/posandu/svelte-ripple-action"
+				alt=""
+			/>
+		</a>
+		<a href="https://github.com/posandu/svelte-ripple-action/stargazers">
+			<img
+				alt="GitHub Repo stars"
+				src="https://img.shields.io/github/stars/posandu/svelte-ripple-action"
+			/>
+		</a>
 	</p>
 </div>
 

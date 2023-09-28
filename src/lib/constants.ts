@@ -48,9 +48,13 @@ const findFurthestPoint = (
 	elementHeight: number,
 	offsetY: number
 ) => {
-	let x = clickPointX - offsetX > elementWidth / 2 ? 0 : elementWidth;
-	let y = clickPointY - offsetY > elementHeight / 2 ? 0 : elementHeight;
-	let d = Math.hypot(x - (clickPointX - offsetX), y - (clickPointY - offsetY));
+	const x = clickPointX - offsetX > elementWidth / 2 ? 0 : elementWidth;
+	const y = clickPointY - offsetY > elementHeight / 2 ? 0 : elementHeight;
+	const d = Math.hypot(
+		x - (clickPointX - offsetX),
+		y - (clickPointY - offsetY)
+	);
+
 	return d;
 };
 

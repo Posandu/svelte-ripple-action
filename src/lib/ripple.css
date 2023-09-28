@@ -4,12 +4,14 @@
 }
 
 .ripple {
-    background-color: var(--ripple-color, rgba(255, 255, 255, 0.2));
+    background-color: var(--ripple-color, color-mix(in srgb, currentColor 28%, transparent));
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    -webkit-transition: .6s;
-    transition: .6s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: opacity .6s;
+    transition: opacity .6s;
     -webkit-animation: ripple var(--ripple-duration, 0.4s) cubic-bezier(0.4, 0, 0.2, 1);
     animation: ripple var(--ripple-duration, 0.4s) cubic-bezier(0.4, 0, 0.2, 1);
 }
