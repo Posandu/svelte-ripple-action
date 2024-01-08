@@ -1,9 +1,9 @@
-.ripple-effect {
+[svelte-ripple-effect-ready] {
     position: relative;
     overflow: hidden;
 }
 
-.ripple {
+[svelte-ripple-effect-ready] .ripple {
     background-color: var(--ripple-color, color-mix(in srgb, currentColor 28%, transparent));
     position: absolute;
     border-radius: 50%;
@@ -16,7 +16,7 @@
     animation: ripple var(--ripple-duration, 0.4s) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.ripple-center .ripple {
+[svelte-ripple-effect-ready][ripple-center] .ripple {
     top: 50% !important;
     left: 50% !important;
     translate: -50% -50% !important;

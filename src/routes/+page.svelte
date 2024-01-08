@@ -33,14 +33,14 @@
 <div
 	class="header"
 	use:ripple={{
-		color: "rgba(255, 255, 255, 0.2)",
+		color: "rgba(0, 0, 0, 0.2)",
 		duration: 1,
 	}}
 	bind:this={header}
 >
-	<h1>
-		<code> Svelte ripple action </code>
-	</h1>
+	<img src="/logo-large.png" alt="" srcset="" class="mainImg" />
+
+	<h1>Svelte ripple action</h1>
 
 	<p class="description">Svelte directive for a ripple effect</p>
 
@@ -314,8 +314,17 @@
 
 	:global(html, body) {
 		height: 100%;
-		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-			Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		font-family:
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			Oxygen,
+			Ubuntu,
+			Cantarell,
+			"Open Sans",
+			"Helvetica Neue",
 			sans-serif;
 	}
 
@@ -328,6 +337,7 @@
 		background-color: #d8411b;
 		user-select: none;
 		color: white;
+		padding-bottom: 20px;
 
 		& h1 {
 			font-size: 2rem;
@@ -398,5 +408,13 @@
 				text-decoration: underline;
 			}
 		}
+	}
+
+	.mainImg {
+		width: 150px;
+		height: 150px;
+		object-fit: contain;
+		margin: 20px 0;
+		border-radius: 50%;
 	}
 </style>

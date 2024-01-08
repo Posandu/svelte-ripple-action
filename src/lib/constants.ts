@@ -8,8 +8,8 @@ const OUTEVENTS = [
 	"touchcancel",
 ];
 
-const CLASS = "ripple-effect";
-const CENTER_CLASS = "ripple-center";
+const ATTR_NAME = "svelte-ripple-effect-ready";
+const ATTR_CENTER_NAME = "ripple-center";
 
 export interface RippleOptions {
 	center?: boolean;
@@ -61,8 +61,8 @@ const findFurthestPoint = (
 export {
 	INEVENTS,
 	OUTEVENTS,
-	CLASS,
-	CENTER_CLASS,
+	ATTR_NAME,
+	ATTR_CENTER_NAME,
 	addEvent,
 	removeEvent,
 	findFurthestPoint,

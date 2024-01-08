@@ -2,25 +2,30 @@ import type { RippleOptions } from "./constants.js";
 import {
 	INEVENTS,
 	OUTEVENTS,
-	CLASS,
-	CENTER_CLASS,
+	ATTR_NAME,
+	ATTR_CENTER_NAME,
 	addEvent,
 	removeEvent,
 	findFurthestPoint,
 } from "./constants";
+import { onMount } from "svelte";
 
 function ripple(el: HTMLElement, options?: RippleOptions) {
 	const addClassIfMissing = () => {
-		if (!el.classList.contains(CLASS)) {
-			el.classList.add(CLASS);
+		if (!el.getAttribute(ATTR_NAME)) {
+			el.setAttribute(ATTR_NAME, "");
 		}
 
 		if (options?.center) {
-			el.classList.add(CENTER_CLASS);
+			el.setAttribute(ATTR_CENTER_NAME, "");
+		} else {
+			el.removeAttribute(ATTR_CENTER_NAME);
 		}
 	};
 
-	addClassIfMissing();
+	onMount(() => {
+		addClassIfMissing();
+	})
 
 	let maximumRadius = 0;
 
@@ -77,20 +82,25 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 
 		ripple.style.left = left + "px";
 		ripple.style.top = top + "px";
-	
+
 		ripple.style.width = ripple.style.height = size + "px";
 
 		el.appendChild(ripple);
 
 		const removeRipple = () => {
+			const timeOutDuration = options?.duration ? options.duration * 1000 : 1000;
+
 			if (ripple !== null) {
-				ripple.style.opacity = "0";
+
+				setTimeout(() => {
+					ripple.style.opacity = "0";
+				}, timeOutDuration / 4);
 
 				setTimeout(
 					() => {
 						ripple.remove();
 					},
-					options?.duration ? options.duration * 1000 : 1000
+					timeOutDuration
 				);
 			}
 		};
