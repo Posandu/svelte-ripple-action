@@ -4,6 +4,8 @@
 	import { onMount } from "svelte";
 	import "./app.css";
 	import Examples from "./Examples.svelte";
+	import CodeBlock from "./CodeBlock.svelte";
+	import type { RippleOptions } from "$lib/constants";
 
 	let header: HTMLDivElement | null = null;
 
@@ -25,39 +27,63 @@
 				);
 			}, 600);
 		}
-
-		globalThis.hljs.highlightAll();
 	});
+
+	const SCRIPT = "<scri" + "pt>"; // some weird hack to avoid parsing
+
+	let customizeOptions: RippleOptions = {
+		color: "rgba(255,255,255,0.2)",
+		center: false,
+		disabled: false,
+		duration: 0.6,
+		maxRadius: 0,
+	};
 </script>
 
 <div
 	class="header"
 	use:ripple={{
 		color: "rgba(0, 0, 0, 0.2)",
-		duration: 1,
+		duration: 0.6,
 	}}
 	bind:this={header}
 >
-	<img src="/logo-large.png" alt="" srcset="" class="mainImg" />
+	<img src="/logo-large.png" alt="" srcset="" class="header--logo" />
 
-	<h1>Svelte ripple action</h1>
+	<h1 class="header--heading">Svelte ripple action</h1>
 
-	<p class="description">Svelte directive for a ripple effect</p>
+	<p class="header--desc">Svelte directive for a ripple effect</p>
 
-	<p style="margin-top: 20px;">
-		<a href="https://npmjs.com/package/svelte-ripple-action">
+	<CodeBlock code={`npm i svelte-ripple-action`} />
+
+	<p class="header--info">
+		<a
+			href="https://npmjs.com/package/svelte-ripple-action"
+			class="header--stat"
+			target="_blank"
+		>
 			<img
 				src="https://deno.bundlejs.com/badge?q=svelte-ripple-action"
 				alt=""
 			/>
 		</a>
-		<a href="https://github.com/posandu/svelte-ripple-action/commits">
+
+		<a
+			href="https://github.com/posandu/svelte-ripple-action/commits"
+			class="header--stat"
+			target="_blank"
+		>
 			<img
 				src="https://img.shields.io/github/commit-activity/t/posandu/svelte-ripple-action"
 				alt=""
 			/>
 		</a>
-		<a href="https://github.com/posandu/svelte-ripple-action/stargazers">
+
+		<a
+			href="https://github.com/posandu/svelte-ripple-action/stargazers"
+			class="header--stat"
+			target="_blank"
+		>
 			<img
 				alt="GitHub Repo stars"
 				src="https://img.shields.io/github/stars/posandu/svelte-ripple-action"
@@ -66,355 +92,379 @@
 	</p>
 </div>
 
-<div class="container">
-	<h2>Usage</h2>
+<section class="section">
+	<div class="section--left">
+		<h1 class="section--heading">Installation</h1>
 
-	<p>Install the package from npm or any node package manager of your choice</p>
+		<p class="section--desc">Install the package from npm</p>
 
-	<pre><code class="language-bash">npm i -D svelte-ripple-action</code></pre>
+		<CodeBlock code={`npm i svelte-ripple-action`} />
+	</div>
 
-	<p>Import the CSS styles for the ripple effect.</p>
+	<div class="section--right">
+		<h1 class="section--heading">Usage</h1>
 
-	<pre><code class="language-js">import "svelte-ripple-action/ripple.css";</code
-		></pre>
+		<p class="section--desc">
+			Import the base styles inside the root of your app
+		</p>
 
-	<p>
-		Import the directive from the package and use it on any element you want to
-		have a ripple effect on
-	</p>
+		<CodeBlock
+			code={`${SCRIPT}\n	import "svelte-ripple-action/ripple.css"\n</script>`}
+		/>
 
-	<pre><code class="language-jsx"
-			>{`<scr'ipt>
-  import { ripple } from "svelte-ripple-action";
-</script>
+		<p class="section--desc">Use the directive in your components</p>
 
-<button use:ripple>Click me</button>
-`.replace(/'/g, "")}</code
-		></pre>
+		<CodeBlock
+			code={`${SCRIPT}\n	import { ripple } from "svelte-ripple-action";\n</script>\n\n<button use:ripple>Click me</button>`}
+		/>
 
-	<p>DONE! 🥳 you have a ripple effect on your element.</p>
+		<button
+			use:ripple={{ color: "rgba(255,255,255,0.2)" }}
+			class="btn btn-demo"
+		>
+			Click me
+		</button>
+	</div>
+</section>
 
-	<button use:ripple class="btn" style="margin: 10px 0;"> Click me </button>
+<section class="section">
+	<div class="section--left">
+		<h1 class="section--heading">Options</h1>
 
-	<h2>Options</h2>
+		<p class="section--desc">
+			You can pass an object to the directive to customize the ripple effect
+		</p>
 
-	<p>
-		You can pass options to the ripple action to customize the ripple effect.
-	</p>
+		<div class="option">
+			<div>
+				<span class="option--name"
+					>color?: <span class="option--type">string</span></span
+				>
+				<label class="option--desc" for="color">color of the ripple</label>
+			</div>
 
-	<pre><code class="language-jsx"
-			>{`<scr'ipt>
-  import { ripple } from "svelte-ripple-action";
-</script>
+			<input
+				type="text"
+				placeholder="rgba(255,255,255,0.2)"
+				bind:value={customizeOptions.color}
+				class="option--input"
+				id="color"
+			/>
+		</div>
 
-<button use:ripple={options}>Click me</button>
-`.replace(/'/g, "")}</code
-		></pre>
+		<div class="option">
+			<div>
+				<span class="option--name"
+					>duration?: <span class="option--type">number</span></span
+				>
+				<label class="option--desc" for="duration">
+					duration of the ripple in seconds
+				</label>
+			</div>
 
-	<h3>
-		center?: <code>boolean</code>
-	</h3>
+			<input
+				type="number"
+				placeholder="0.6"
+				bind:value={customizeOptions.duration}
+				class="option--input"
+				id="duration"
+			/>
+		</div>
 
-	<p>
-		By default, the ripple effect starts from the point where the user clicks on
-		the element. If you want the ripple effect to start from the center of the
-		element, you can pass the <code>center</code> option.
-	</p>
+		<div class="option">
+			<div>
+				<span class="option--name"
+					>maxRadius?: <span class="option--type">number</span></span
+				>
+				<label class="option--desc" for="maxRadius">
+					maximum radius of the ripple
+				</label>
+			</div>
 
-	<button
-		use:ripple={{
-			center: true,
-		}}
-		class="btn"
-		style="margin: 10px 0;"
-	>
-		Click me
-	</button>
+			<input
+				type="number"
+				placeholder="leave -1 for auto"
+				bind:value={customizeOptions.maxRadius}
+				class="option--input"
+				id="maxRadius"
+			/>
+		</div>
 
-	<pre><code class="language-html"
-			>{`<button use:ripple={{center:true}}>Click me</button>`}
-</code></pre>
+		<div
+			class="option"
+			style="display: flex;align-items: center;justify-content: space-between;"
+		>
+			<div>
+				<span class="option--name"
+					>center?: <span class="option--type">boolean</span></span
+				>
+				<label class="option--desc" for="center">
+					whether to start the ripple from the center
+				</label>
+			</div>
 
-	<h3>
-		color?: <code>string</code>
-	</h3>
+			<input
+				type="checkbox"
+				bind:checked={customizeOptions.center}
+				class="option--input"
+				style="max-width: 48px;margin:0"
+				id="center"
+			/>
+		</div>
 
-	<p>
-		The color of the ripple effect. You can pass any valid CSS color value to
-		the <code>color</code> option.
-	</p>
+		<div
+			class="option"
+			style="display: flex;align-items: center;justify-content: space-between;margin-bottom: 0; {customizeOptions.disabled
+				? `background: #f70b0b0f;
+				border-color: #ff00003b;`
+				: ''}"
+		>
+			<div>
+				<span class="option--name"
+					>disabled?: <span class="option--type">boolean</span></span
+				>
+				<label class="option--desc" for="disabled">
+					disable the ripple effect
+				</label>
+			</div>
 
-	<button
-		use:ripple={{
-			color: "rgba(255, 0, 0, 0.2)",
-		}}
-		class="btn"
-		style="margin: 10px 0;background-color: white;color:red;border: 1px solid red;"
-	>
-		Red ripple
-	</button>
+			<input
+				type="checkbox"
+				bind:checked={customizeOptions.disabled}
+				class="option--input"
+				style="max-width: 48px;margin:0"
+				id="disabled"
+			/>
+		</div>
+	</div>
 
-	<pre><code class="language-html"
-			>{`<button
-  use:ripple={{
-  	color: "rgba(255, 0, 0, 0.2)",
-  }}
-  style="background-color: white;color:red;border: 1px solid red;"
->
-  Red ripple
-</button>`}
-</code></pre>
+	<div class="section--right preview">
+		<h1 class="section--heading">Preview</h1>
 
-	<h3>
-		duration?: <code>number</code>
-	</h3>
+		<div class="preview--inside">
+			<button
+				use:ripple={{
+					...customizeOptions,
+					maxRadius:
+						customizeOptions.maxRadius === -1
+							? undefined
+							: customizeOptions.maxRadius,
+				}}
+				class="btn btn-demo"
+				style="margin-bottom: 10px"
+			>
+				:) Click me
+			</button>
+		</div>
 
-	<p>
-		Duration of the ripple effect in seconds. You can pass any valid number to
-		the <code>duration</code> option.
-	</p>
-
-	<button
-		use:ripple={{
-			duration: 2,
-		}}
-		class="btn"
-		style="margin: 10px 4px;"
-	>
-		2 seconds
-	</button>
-
-	<button
-		use:ripple={{
-			duration: 0.2,
-		}}
-		class="btn"
-		style="margin: 10px 4px;"
-	>
-		0.2 seconds
-	</button>
-
-	<pre><code class="language-html"
-			>{`<button use:ripple={{duration:2}}>2 seconds</button> 
-<button use:ripple={{duration:0.2}}>0.2 seconds</button>`}
-</code></pre>
-
-	<br />
-
-	<h3>
-		maxRadius?: <code>number</code>
-	</h3>
-
-	<p>
-		Maximum radius of the ripple effect. You can pass any valid number
-		<code>maxRadius</code> option.
-	</p>
-
-	<button
-		use:ripple={{
-			maxRadius: 200,
-		}}
-		class="btn"
-		style="margin: 10px 4px; width: 400px; height: 200px;"
-	>
-		200px
-	</button>
-
-	<pre><code class="language-html"
-			>{`<button use:ripple={{maxRadius:200}} style="width: 400px; height: 200px;">200px</button>`}
-</code></pre>
-
-	<h2>Some examples</h2>
-
-	<Examples />
-
-	<pre><code class="language-html" style="margin-top: 20px;"
-			>{`<div use:ripple class="box imgripple">Image ripple</div>
-<div use:ripple class="box gradient">Gradient ripple</div>
-
-<br />
-
-<p>Needs to be wrapped in a div for void elements like img, input, etc.</p>
-<div use:ripple class="imgbox">
-	<img
-		src="https://media.tenor.com/VFFJ8Ei3C2IAAAAM/rickroll-rick.gif"
-		alt="Man dancing"
-	/>
-</div>
-
-<div
+		<CodeBlock
+			code={`<button 
 	use:ripple={{
-		color: "rgba(0,0,0,0.5)",
+		color: "${customizeOptions.color}",
+		duration: ${customizeOptions.duration},
+		${
+			customizeOptions.maxRadius === -1
+				? ""
+				: `maxRadius: ${customizeOptions.maxRadius},`
+		}
+		center: ${customizeOptions.center},
+		disabled: ${customizeOptions.disabled},
 	}}
 >
-	<input type="text" placeholder="Type something" style="width: 100%;" />
-</div>
+	Click me
+</button>`}
+		/>
+	</div>
+</section>
+
+<section class="examples section">
+	<h2 class="section--heading">Other examples</h2>
+
+	<Examples />
+</section>
+
+<p class="footer">
+	Created by <a href="https://posandu.com" target="_blank">@Posandu</a>.
+	Licensed under MIT.
+</p>
 
 <style>
-.box {
-  height: 200px;
-  width: 200px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-top: 20px;
-  margin-right: 20px;
-  display: inline-flex;
-}
-
-.imgbox {
-  height: 200px;
-  width: 200px;
-  border-radius: 5px;
-  margin-top: 20px;
-  margin-right: 20px;
-  display: inline-flex;
-  & img {
-  	width: 100%;
-  	height: 100%;
-  	object-fit: cover;
-  }
-}
-
-.imgripple {
-  & .ripple {
-  	background: url(https://media.tenor.com/VFFJ8Ei3C2IAAAAM/rickroll-rick.gif);
-  	background-size: 80%;
-  	background-position: center;
-  	background-repeat: no-repeat;
-  	z-index: -1;
-  }
-}
-
-.gradient {
-  & .ripple {
-  	background: linear-gradient(45deg, #f3ed783d, #af4261);
-  }
-}
-</style>`}</code
-		></pre>
-
-	<footer style="margin-top: 20px;" class="footer">
-		<p>
-			Created by <a href="https://posandu.com">Posandu</a>. Check out the source
-			code on
-			<a href="https://github.com/posandu/svelte-ripple-action">GitHub</a>
-		</p>
-	</footer>
-</div>
-
-<style>
-	:global(*, *::before, *::after) {
-		box-sizing: border-box;
-		padding: 0;
-		margin: 0;
-		font-family: inherit;
-	}
-
-	:global(html, body) {
-		height: 100%;
-		font-family:
-			system-ui,
-			-apple-system,
-			BlinkMacSystemFont,
-			"Segoe UI",
-			Roboto,
-			Oxygen,
-			Ubuntu,
-			Cantarell,
-			"Open Sans",
-			"Helvetica Neue",
-			sans-serif;
-	}
-
 	.header {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		justify-content: center;
-		min-height: 300px;
-		background-color: #d8411b;
-		user-select: none;
+		background: #d23604;
 		color: white;
-		padding-bottom: 20px;
-
-		& h1 {
-			font-size: 2rem;
-			margin-bottom: 1rem;
-		}
-
-		& .description {
-			font-size: 1.2rem;
-			color: #f0f0f0;
-		}
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 20px;
+		min-height: 310px;
+		line-height: 66px;
+		user-select: none;
+	}
+	.header--logo {
+		width: 100px;
+		border-radius: 100px;
+	}
+	.header--heading {
+		font-size: 33px;
+		font-weight: 600;
+		margin-top: 15px;
+	}
+	.header--desc {
+		font-size: 17px;
+		font-weight: 500;
+		color: #fffffff7;
 	}
 
-	code {
-		background-color: rgba(255, 255, 255, 0.2);
-		border-radius: 0.2rem;
+	:global(.header .shiki) {
+		border-radius: 20px;
+		padding: 10px 20px;
+		line-height: 25px;
+		user-select: text;
 	}
 
-	.container {
-		padding: 2rem;
-		max-width: 800px;
-		margin: 0 auto;
-
-		& p {
-			line-height: 40px;
-		}
-
-		& pre code {
-			background-color: rgb(24, 24, 24);
-			font-family: "Consolas", "Courier New", monospace;
-			display: block;
-		}
-
-		& h3 {
-			margin-top: 20px;
-		}
+	.section {
+		display: flex;
+		padding: 10px;
+		max-width: 1024px;
+		margin: 20px auto;
+		gap: 50px;
+	}
+	.section--left,
+	.section--right {
+		flex: 1;
+	}
+	.section--heading {
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 7px;
+	}
+	.section--desc {
+		color: #2f2f2f;
+		line-height: 40px;
+		font-size: 15px;
+	}
+	:global(.section .shiki) {
+		padding: 10px;
+		border-radius: 10px;
 	}
 
 	.btn {
-		padding: 0.5rem 1rem;
-		border-radius: 0.2rem;
-		background-color: #ff4e21;
+		padding: 10px 20px;
+		border-radius: 4px;
+		background: #fe3e00;
 		color: white;
-		border: none;
-		cursor: pointer;
-		font-size: 1rem;
+		font-size: 16px;
 		font-weight: 600;
+		box-shadow:
+			rgba(0, 0, 0, 0.2) 0px 3px 1px -2px,
+			rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+			rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
 		transition: all 0.2s ease;
+	}
+	.btn-demo {
+		margin-top: 20px;
+	}
+	.btn:hover {
+		background: #ff5017;
+		box-shadow:
+			rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
+			rgba(0, 0, 0, 0.14) 0px 4px 5px 0px,
+			rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+	}
 
-		&:hover {
-			background-color: #f33e16;
-		}
+	.btn:active {
+		box-shadow:
+			rgba(0, 0, 0, 0.2) 0px 5px 5px -3px,
+			rgba(0, 0, 0, 0.14) 0px 8px 10px 1px,
+			rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
+	}
 
-		&:focus {
-			outline: none;
-		}
+	.option--name {
+		font-weight: 600;
+	}
+	.option--desc {
+		color: #737373;
+		font-weight: 500;
+	}
+	.option--input {
+		margin-top: 10px;
+		width: 100%;
+		background: #e8e8e8;
+		border-radius: 10px;
+		padding: 8px 10px;
+		font-size: 14px;
+		outline: none;
+	}
+	.option--input:hover {
+		background: #d9d9d9;
+	}
+	.option--input:focus {
+		background: #dbdbdb;
+		box-shadow: 0 0 0 2px #fe3e0059;
+	}
+	.option {
+		border: 1px solid #0000001a;
+		border-radius: 11px;
+		padding: 10px;
+		margin: 4px -10px;
+		margin-bottom: 8px;
+	}
+
+	.option--type {
+		font-weight: 500;
+		font-style: italic;
+	}
+
+	.section--right.preview {
+		display: flex;
+		flex-direction: column;
+	}
+	.preview--inside {
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		background: #f9f9f9;
+		border-radius: 10px;
+	}
+
+	.examples {
+		display: block !important;
 	}
 
 	.footer {
-		margin-top: 20px;
+		margin: 18px 0;
 		text-align: center;
-
-		& a {
-			color: #ff4e21;
-			text-decoration: none;
-			font-weight: 600;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
 	}
 
-	.mainImg {
-		width: 150px;
-		height: 150px;
-		object-fit: contain;
-		margin: 20px 0;
-		border-radius: 50%;
+	a {
+		color: #fe3e00;
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	a:active {
+		color: #ff5017;
+	}
+
+	a:focus {
+		box-shadow: 0 0 0 2px #fe3e0059;
+	}
+
+	@media (max-width: 768px) {
+		.section {
+			flex-direction: column;
+		}
+		.section--left,
+		.section--right {
+			flex: 1;
+		}
+		.section--right {
+			margin-top: 20px;
+		}
 	}
 </style>

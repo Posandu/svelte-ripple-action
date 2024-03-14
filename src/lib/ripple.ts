@@ -25,7 +25,7 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 
 	onMount(() => {
 		addClassIfMissing();
-	})
+	});
 
 	let maximumRadius = 0;
 
@@ -55,6 +55,10 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 	setOptions(options);
 
 	const createRipple = (e: PointerEvent) => {
+		if (options?.disabled) return;
+
+		e.stopPropagation();
+
 		addClassIfMissing();
 
 		const rect = el.getBoundingClientRect();
@@ -88,20 +92,18 @@ function ripple(el: HTMLElement, options?: RippleOptions) {
 		el.appendChild(ripple);
 
 		const removeRipple = () => {
-			const timeOutDuration = options?.duration ? options.duration * 1000 : 1000;
+			const timeOutDuration = options?.duration
+				? options.duration * 1000
+				: 1000;
 
 			if (ripple !== null) {
-
 				setTimeout(() => {
 					ripple.style.opacity = "0";
 				}, timeOutDuration / 4);
 
-				setTimeout(
-					() => {
-						ripple.remove();
-					},
-					timeOutDuration
-				);
+				setTimeout(() => {
+					ripple.remove();
+				}, timeOutDuration);
 			}
 		};
 

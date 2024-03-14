@@ -22,6 +22,10 @@ export interface RippleOptions {
 	 * Max width of the ripple
 	 */
 	maxRadius?: number;
+	/**
+	 * If true, ripple will not be shown
+	 */
+	disabled?: boolean;
 }
 
 const addEvent = (

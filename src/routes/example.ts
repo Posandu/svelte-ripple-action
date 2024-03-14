@@ -1,8 +1,7 @@
-<script>
-	import { ripple } from "$lib";
-	import CodeBlock from "./CodeBlock.svelte";
-	import { CODE } from "./example";
-</script>
+const SCRIPT = `script>`;
+const CODE = `<${SCRIPT}
+	import { ripple } from "svelte-ripple-action";
+</${SCRIPT}
 
 <div use:ripple class="box imgripple">Image ripple</div>
 <div use:ripple class="box gradient">Gradient ripple</div>
@@ -14,7 +13,7 @@
 
 <div use:ripple class="imgbox">
 	<img
-		src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Yml0Y29pbnxlbnwwfHwwfHx8MA%3D%3D"
+		src="...."
 		alt="Man dancing"
 	/>
 </div>
@@ -26,10 +25,6 @@
 >
 	<input type="text" placeholder="Type something" style="width: 100%;" />
 </div>
-
-<br /><br />
-
-<CodeBlock code={CODE} />
 
 <style>
 	.box {
@@ -61,7 +56,7 @@
 	}
 
 	:global(.imgripple .ripple) {
-		background: url(https://media.tenor.com/VFFJ8Ei3C2IAAAAM/rickroll-rick.gif);
+		background: url(.....);
 		background-size: 80%;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -69,6 +64,13 @@
 	}
 
 	:global(.gradient .ripple) {
-		background: linear-gradient(45deg, #f3ed783d, #af4261);
+		background: linear-gradient(
+			45deg, 
+			#f3ed783d, 
+			#af4261
+		);
 	}
 </style>
+`;
+
+export { CODE };
