@@ -257,8 +257,9 @@
 			</button>
 		</div>
 
-		<CodeBlock
-			code={`<button 
+		{#key customizeOptions}
+			<CodeBlock
+				code={`<button 
 	use:ripple={{
 		color: "${customizeOptions.color}",
 		duration: ${customizeOptions.duration},
@@ -273,7 +274,8 @@
 >
 	Click me
 </button>`}
-		/>
+			/>
+		{/key}
 	</div>
 </section>
 
