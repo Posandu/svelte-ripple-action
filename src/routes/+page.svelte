@@ -7,7 +7,7 @@
 	import CodeBlock from "./CodeBlock.svelte";
 	import type { RippleOptions } from "$lib/constants";
 
-	let header: HTMLDivElement | null = null;
+	let header: HTMLDivElement | null = $state(null);
 
 	onMount(() => {
 		if (header) {
@@ -31,13 +31,13 @@
 
 	const SCRIPT = "<scri" + "pt>"; // some weird hack to avoid parsing
 
-	let customizeOptions: RippleOptions = {
+	let customizeOptions: RippleOptions = $state({
 		color: "rgba(255,255,255,0.2)",
 		center: false,
 		disabled: false,
 		duration: 0.6,
 		maxRadius: 0,
-	};
+	});
 </script>
 
 <div
@@ -99,6 +99,12 @@
 		<p class="section--desc">Install the package from npm</p>
 
 		<CodeBlock code={`npm i svelte-ripple-action`} />
+
+		<br />
+
+		<h1 class="section--heading">Is this compatible with Svelte 5?</h1>
+
+		<p class="section--desc">Yep, versions 2.0.0 onwards support Svelte 5</p>
 	</div>
 
 	<div class="section--right">
@@ -363,6 +369,7 @@
 			rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
 			rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
 		transition: all 0.2s ease;
+		user-select: none;
 	}
 	.btn-demo {
 		margin-top: 20px;

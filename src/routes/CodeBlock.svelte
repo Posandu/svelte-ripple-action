@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { codeToHtml } from "shiki";
 
-	export let code: string;
+	interface Props {
+		code: string;
+	}
+
+	let { code }: Props = $props();
 
 	const html = codeToHtml(code, {
 		lang: "svelte",
